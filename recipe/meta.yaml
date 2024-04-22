@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   noarch: python
-  script: "{{ PYTHON }} -m pip install --no-build-isolation . -vv --no-deps --no-build-isolation"
+  script: "{{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv"
 
 requirements:
   host:
@@ -27,6 +27,7 @@ requirements:
     - types-pyyaml >=6.0.7
     - types-requests >=2.27.25
     - typing-extensions >=4.2.0
+    - wheel
   run:
     - cryptography >=42.0.4,<43.0.0
     - grpcio >=1.46.0
