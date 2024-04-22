@@ -1,129 +1,53 @@
 {% set name = "cloudvision" %}
-{% set version = "1.19.0" %}
+{% set version = "1.19.1" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: e685ced4d2e8302c1d6790cd6d6c5d006d02f6ad0d02c5b47f47e0d83257c2eb
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/cloudvision-{{ version }}.tar.gz
+  sha256: f865cc7a5e324fbd6259454f5e2b056c381566349e797e0ddce2131b52d971e1
 
 build:
-  number: 0
   noarch: python
-  script: "{{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv"
+  script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv
+  number: 0
 
 requirements:
   host:
-    - cryptography >=42.0.4,<43.0.0
-    - grpcio >=1.46.0
-    - msgpack >=1.0.3
+    - python >=3.7.0
+    - setuptools >=62.1.0
     - pip
-    - protobuf >=3.20.1,<4.0
-    - python
-    - requests >=2.20.1
-    - types-protobuf >=3.20.1,<4.0
-    - types-pyyaml >=6.0.7
-    - types-requests >=2.27.25
-    - typing-extensions >=4.2.0
-    - wheel
   run:
-    - cryptography >=42.0.4,<43.0.0
+    - python >=3.7.0
+    - cryptography <43.0.0,>=42.0.4
     - grpcio >=1.46.0
-    - msgpack >=1.0.3
-    - protobuf >=3.20.1,<4.0
-    - python
+    - msgpack-python >=1.0.3
+    - protobuf <4.0,>=3.20.1
     - requests >=2.20.1
-    - types-protobuf >=3.20.1,<4.0
+    - typing-extensions >=4.2.0
+    - types-protobuf <4.0,>=3.20.1
     - types-pyyaml >=6.0.7
     - types-requests >=2.27.25
-    - typing-extensions >=4.2.0
 
 test:
   imports:
-    - arista
-    - arista.alert
-    - arista.alert.v1
-    - arista.alert.v1.services
-    - arista.bugexposure
-    - arista.bugexposure.v1
-    - arista.bugexposure.v1.services
-    - arista.changecontrol
-    - arista.changecontrol.v1
-    - arista.changecontrol.v1.services
-    - arista.configlet
-    - arista.configlet.v1
-    - arista.configlet.v1.services
-    - arista.configstatus
-    - arista.configstatus.v1
-    - arista.configstatus.v1.services
-    - arista.connectivitymonitor
-    - arista.connectivitymonitor.v1
-    - arista.connectivitymonitor.v1.services
-    - arista.dashboard
-    - arista.dashboard.v1
-    - arista.dashboard.v1.services
-    - arista.endpointlocation
-    - arista.endpointlocation.v1
-    - arista.endpointlocation.v1.services
-    - arista.event
-    - arista.event.v1
-    - arista.event.v1.services
-    - arista.identityprovider
-    - arista.identityprovider.v1
-    - arista.identityprovider.v1.services
-    - arista.imagestatus
-    - arista.imagestatus.v1
-    - arista.imagestatus.v1.services
-    - arista.inventory
-    - arista.inventory.v1
-    - arista.inventory.v1.services
-    - arista.lifecycle
-    - arista.lifecycle.v1
-    - arista.lifecycle.v1.services
-    - arista.redirector
-    - arista.redirector.v1
-    - arista.redirector.v1.services
-    - arista.serviceaccount
-    - arista.serviceaccount.v1
-    - arista.serviceaccount.v1.services
-    - arista.studio
-    - arista.studio.v1
-    - arista.studio.v1.services
-    - arista.subscriptions
-    - arista.tag
-    - arista.tag.v1
-    - arista.tag.v1.services
-    - arista.tag.v2
-    - arista.tag.v2.services
-    - arista.time
-    - arista.workspace
-    - arista.workspace.v1
-    - arista.workspace.v1.services
     - cloudvision
-    - cloudvision.Connector
-    - cloudvision.Connector.auth
-    - cloudvision.Connector.codec
-    - cloudvision.Connector.core
-    - cloudvision.Connector.gen
-    - cloudvision.Connector.grpc_client
-    - cloudvision.cvlib
-    - fmp
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
-  home: "https://github.com/aristanetworks/cloudvision-python"
-  license: Apache Software
-  license_family: APACHE
-  license_file: 
-  summary: "A Python library for Arista's CloudVision APIs."
-  doc_url: 
-  dev_url: 
+  summary: A Python library for Arista's CloudVision APIs and Provisioning Action integrations.
+  dev_url: https://github.com/aristanetworks/cloudvision-python
+  license: Apache-2.0
+  license_file: COPYING
 
 extra:
   anaconda-services:
-    ref: https://anaconda.zendesk.com/agent/tickets/48416
+    ref: https://anaconda.zendesk.com/agent/tickets/47182
     reason: Client request
   recipe-maintainers:
-    - ianaobi
-    - bkreider
+    - anaobi
