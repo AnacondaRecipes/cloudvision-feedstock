@@ -29,7 +29,7 @@ requirements:
     - protobuf 
     - requests 
     - typing-extensions 
-    - types-protobuf 
+    - types-protobuf <4.0 
     - types-pyyaml 
     - types-requests 
 
