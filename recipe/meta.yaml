@@ -1,0 +1,55 @@
+{% set name = "cloudvision" %}
+{% set version = "1.19.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/cloudvision-{{ version }}.tar.gz
+  sha256: f865cc7a5e324fbd6259454f5e2b056c381566349e797e0ddce2131b52d971e1
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install --no-deps --no-build-isolation . -vv
+  number: 0
+
+requirements:
+  host:
+#    - python >=3.7.0
+#    - setuptools >=62.1.0
+    - python 
+    - setuptools 
+    - pip
+  run:
+    - python >=3.7.0
+    - cryptography
+    - grpcio 
+    - msgpack-python 
+    - protobuf 
+    - requests 
+    - typing-extensions 
+    - types-protobuf <4.0 
+    - types-pyyaml 
+    - types-requests 
+
+test:
+  imports:
+    - cloudvision
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: A Python library for Arista's CloudVision APIs and Provisioning Action integrations.
+  dev_url: https://github.com/aristanetworks/cloudvision-python
+  license: Apache-2.0
+  license_file: COPYING
+
+extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/47182
+    reason: Client request
+  recipe-maintainers:
+    - anaobi
